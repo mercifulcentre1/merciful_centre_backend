@@ -62,10 +62,10 @@ Route::get('/delete-link', function() {
 });
 
 // Fallback route to serve images on shared hosting where symlinks are disabled
-Route::get('storage/{folder}/{filename}', function ($folder, $filename) {
-    $path = storage_path('app/public/' . $folder . '/' . $filename);
-    if (!file_exists($path)) {
-        abort(404);
+Route::get('storage/{path}', function ($path) {
+    $fullPath = storage_path('app/public/' . $path);
+    if (!file_exists($fullPath)) {
+        abort(404, "File not found at: " . $fullPath);
     }
-    return response()->file($path);
-});
+    return response()->file($fullPath);
+})->where('path', '.*');
