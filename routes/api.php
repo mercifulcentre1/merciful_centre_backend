@@ -26,6 +26,16 @@ Route::get('/livestream/archives', [LivestreamController::class, 'archives']);
 
 Route::get('/settings', [SettingController::class, 'index']);
 
+// Fallback route inside API to bypass Apache intercepting root /storage path
+Route::get('storage/{path}', function ($path) {
+    $fullPath = storage_path('app/public/' . $path);
+    if (!file_exists($fullPath)) {
+        return response("DEBUG ERROR: The file is missing from this exact path:\n" . $fullPath, 404)
+            ->header('Content-Type', 'text/plain');
+    }
+    return response()->file($fullPath);
+})->where('path', '.*');
+
 
 // Protected routes
 Route::middleware('auth:sanctum')->group(function () {
