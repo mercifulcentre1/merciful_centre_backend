@@ -36,3 +36,13 @@ Route::get('/link-storage', function () {
         return 'Error: ' . $e->getMessage();
     }
 });
+
+Route::get('/fix', function () {
+    try {
+        \Illuminate\Support\Facades\Artisan::call('optimize:clear');
+        \Illuminate\Support\Facades\Artisan::call('storage:link');
+        return 'Cache cleared and storage link created successfully! Your images should now work.';
+    } catch (\Exception $e) {
+        return 'Error: ' . $e->getMessage();
+    }
+});
