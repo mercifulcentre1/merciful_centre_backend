@@ -27,3 +27,12 @@ Route::get('/server-setup', function () {
         return 'Error: ' . $e->getMessage();
     }
 });
+
+Route::get('/link-storage', function () {
+    try {
+        \Illuminate\Support\Facades\Artisan::call('storage:link');
+        return 'Storage link created successfully! Your images should now work.';
+    } catch (\Exception $e) {
+        return 'Error: ' . $e->getMessage();
+    }
+});
