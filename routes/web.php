@@ -65,7 +65,8 @@ Route::get('/delete-link', function() {
 Route::get('storage/{path}', function ($path) {
     $fullPath = storage_path('app/public/' . $path);
     if (!file_exists($fullPath)) {
-        abort(404, "File not found at: " . $fullPath);
+        return response("DEBUG ERROR: The file is completely missing from this exact path on your server:\n" . $fullPath . "\n\nPlease check cPanel and ensure the file is physically located exactly in that folder!", 404)
+            ->header('Content-Type', 'text/plain');
     }
     return response()->file($fullPath);
 })->where('path', '.*');
