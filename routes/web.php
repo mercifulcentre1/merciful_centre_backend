@@ -47,6 +47,20 @@ Route::get('/fix', function () {
     }
 });
 
+Route::get('/delete-link', function() {
+    $storagePath = public_path('storage');
+    if (file_exists($storagePath) || is_link($storagePath)) {
+        if (PHP_OS_FAMILY === 'Windows') {
+            @rmdir($storagePath);
+        } else {
+            @unlink($storagePath);
+            @exec('rm -rf ' . escapeshellarg($storagePath));
+        }
+        return "Deleted broken public/storage link! Laravel will now serve the images.";
+    }
+    return "No link found.";
+});
+
 // Fallback route to serve images on shared hosting where symlinks are disabled
 Route::get('storage/{folder}/{filename}', function ($folder, $filename) {
     $path = storage_path('app/public/' . $folder . '/' . $filename);
