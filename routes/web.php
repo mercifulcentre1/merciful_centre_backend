@@ -46,3 +46,12 @@ Route::get('/fix', function () {
         return 'Error: ' . $e->getMessage();
     }
 });
+
+// Fallback route to serve images on shared hosting where symlinks are disabled
+Route::get('storage/{folder}/{filename}', function ($folder, $filename) {
+    $path = storage_path('app/public/' . $folder . '/' . $filename);
+    if (!file_exists($path)) {
+        abort(404);
+    }
+    return response()->file($path);
+});
