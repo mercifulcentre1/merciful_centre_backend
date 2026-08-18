@@ -31,7 +31,7 @@ jobs:
         security: loose
         timeout: 120000
         local-dir: ./
-        server-dir: /
+        server-dir: /api.mercifulcentre.org/
         exclude: |
           **/.git*
           **/.git*/**
