@@ -29,10 +29,10 @@ class SermonsController extends Controller
         ]);
 
         if ($request->hasFile('audio_file')) {
-            $data['audio_url'] = 'storage/' . $request->file('audio_file')->store('sermons', 'public');
+            $data['audio_url'] = 'api/storage/' . $request->file('audio_file')->store('sermons', 'public');
         }
         if ($request->hasFile('thumbnail_file')) {
-            $data['thumbnail_url'] = 'storage/' . $request->file('thumbnail_file')->store('thumbnails', 'public');
+            $data['thumbnail_url'] = 'api/storage/' . $request->file('thumbnail_file')->store('thumbnails', 'public');
         }
 
         $sermon = Sermon::create($data);
@@ -52,10 +52,10 @@ class SermonsController extends Controller
         ]);
 
         if ($request->hasFile('audio_file')) {
-            $data['audio_url'] = 'storage/' . $request->file('audio_file')->store('sermons', 'public');
+            $data['audio_url'] = 'api/storage/' . $request->file('audio_file')->store('sermons', 'public');
         }
         if ($request->hasFile('thumbnail_file')) {
-            $data['thumbnail_url'] = 'storage/' . $request->file('thumbnail_file')->store('thumbnails', 'public');
+            $data['thumbnail_url'] = 'api/storage/' . $request->file('thumbnail_file')->store('thumbnails', 'public');
         }
 
         $sermon->update($data);

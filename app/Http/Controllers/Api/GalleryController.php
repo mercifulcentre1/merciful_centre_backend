@@ -23,7 +23,7 @@ class GalleryController extends Controller
         $data['uploaded_by'] = $request->user()->id;
 
         if ($request->hasFile('image_file')) {
-            $data['image_url'] = 'storage/' . $request->file('image_file')->store('gallery', 'public');
+            $data['image_url'] = 'api/storage/' . $request->file('image_file')->store('gallery', 'public');
         }
 
         $gallery = Gallery::create($data);
@@ -41,7 +41,7 @@ class GalleryController extends Controller
         ]);
 
         if ($request->hasFile('image_file')) {
-            $data['image_url'] = 'storage/' . $request->file('image_file')->store('gallery', 'public');
+            $data['image_url'] = 'api/storage/' . $request->file('image_file')->store('gallery', 'public');
         }
 
         $gallery->update($data);

@@ -28,7 +28,7 @@ class EventsController extends Controller
         ]);
 
         if ($request->hasFile('image_file')) {
-            $data['image_url'] = 'storage/' . $request->file('image_file')->store('events', 'public');
+            $data['image_url'] = 'api/storage/' . $request->file('image_file')->store('events', 'public');
         }
 
         $event = Event::create($data);
@@ -47,7 +47,7 @@ class EventsController extends Controller
         ]);
 
         if ($request->hasFile('image_file')) {
-            $data['image_url'] = 'storage/' . $request->file('image_file')->store('events', 'public');
+            $data['image_url'] = 'api/storage/' . $request->file('image_file')->store('events', 'public');
         }
 
         $event->update($data);
